@@ -1,5 +1,6 @@
 Requesting from server running in: http://introsde-assignment3.herokuapp.com/ws/people?wsdl
 
+
 Request #1: readPersonList()
 => Body: 
 Person id: 1 
@@ -19,7 +20,7 @@ Value: 180.0
 ValueType: double 
  
 Person id: 2 
-Firstname: Charlie 
+Firstname: Charlie-c228b971-831e-4fa8-9449-6a137614c4d8 
 Lastname: Brown 
 Birthdate: 1945-01-10 
 Healthprofile:
@@ -39,15 +40,15 @@ Firstname: Jack
 Lastname: Black 
 Birthdate: 1960-10-10 
 Healthprofile:
-Mid : 7 
-Created: 2014-10-18 
-MeasureType: weight 
-Value: 72.0 
-ValueType: double 
 Mid : 8 
 Created: 2015-09-09 
 MeasureType: height 
 Value: 180.0 
+ValueType: double 
+Mid : 720 
+Created: 2015-12-06 
+MeasureType: weight 
+Value: 90.0 
 ValueType: double 
  
 Person id: 4 
@@ -139,8 +140,26 @@ ValueType: double
 
 Request #3: updatePerson(2)
 => Body: 
+Old person: 
 Person id: 2 
-Firstname: Charlie-41604ee2-7ccd-4f5d-8d7b-c74d2dd707a8 
+Firstname: Charlie-c228b971-831e-4fa8-9449-6a137614c4d8 
+Lastname: Brown 
+Birthdate: 1945-01-10 
+Healthprofile:
+Mid : 4 
+Created: 2013-12-29 
+MeasureType: weight 
+Value: 90.0 
+ValueType: double 
+Mid : 6 
+Created: 2015-06-19 
+MeasureType: height 
+Value: 172.0 
+ValueType: double 
+ 
+Updated person: 
+Person id: 2 
+Firstname: Charlie-ecbf76a0-c368-4f72-bec9-e4b7b62d8be5 
 Lastname: Brown 
 Birthdate: 1945-01-10 
 Healthprofile:
@@ -159,17 +178,17 @@ ValueType: double
 
 Request #4: createPerson()
 => Body: 
-Person id: 708 
+Person id: 715 
 Firstname: Testeri 
 Lastname: Testaa 
 Birthdate: 1990-05-10 
 Healthprofile:
-Mid : 718 
+Mid : 739 
 Created: 2015-12-06 
 MeasureType: weight 
 Value: 85.0 
 ValueType: double 
-Mid : 719 
+Mid : 740 
 Created: 2015-12-06 
 MeasureType: height 
 Value: 190.0 
@@ -177,13 +196,14 @@ ValueType: double
  
 
 
-Request #5: deletePerson(708)
+Request #5: deletePerson(715)
 => Body: 
-Person deleted 
+Person 715 deleted 
 
 
 Request #6: readPersonHistory(1, weight)
 => Body: 
+Weight measure history for person 1: 
 Mid : 1 
 Created: 2010-02-15 
 MeasureType: weight 
@@ -215,7 +235,7 @@ ValueType: double
 
 Request #9: savePersonMeasure(3, Measure createdMeasure)
 => Body: 
-Mid : 720 
+Mid : 741 
 Created: 2015-12-06 
 MeasureType: weight 
 Value: 85.0 
@@ -224,7 +244,15 @@ ValueType: double
 
 Request #10: updatePersonMeasure(3, Measure createdMeasure)
 => Body: 
-Mid : 720 
+Old measure: 
+Mid : 741 
+Created: 2015-12-06 
+MeasureType: weight 
+Value: 85.0 
+ValueType: double 
+ 
+Updated measure: 
+Mid : 741 
 Created: 2015-12-06 
 MeasureType: weight 
 Value: 90.0 

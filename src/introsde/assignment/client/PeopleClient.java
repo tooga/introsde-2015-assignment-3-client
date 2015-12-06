@@ -36,11 +36,8 @@ public class PeopleClient{
         // Set logfile
         logFile = new PrintWriter("client-server.log");
         
-        // Set server info and print it
-        String serverUrl = "http://introsde-assignment3.herokuapp.com/ws/people?wsdl";
-        String serverInfo = "Requesting from server running in: " + serverUrl;
-        System.out.println(serverInfo);
-        logFile.println(serverInfo);
+        // Print server info
+        c.printServerInfo();
 
         // Call client methods
         c.callMethod1();
@@ -97,13 +94,16 @@ public class PeopleClient{
         String parameters = "2";
         // Read person 2
         Person p = people.readPerson(2);
+        String body = "Old person:" + " \n";
+        body += stringifyPerson(p);
         // Create unique string and add that to person name to change it
         String uuid = UUID.randomUUID().toString();
         p.setFirstname("Charlie"+"-"+uuid);
         // Update person and get the updated person
         int personId = people.updatePerson(p);
         Person updPerson = people.readPerson(personId);
-        String body = stringifyPerson(updPerson);
+        body += "Updated person:" + " \n";
+        body += stringifyPerson(updPerson);
         printRequest(methodNumber, methodName, parameters, body);
     }
     
@@ -166,9 +166,9 @@ public class PeopleClient{
         String body = "";
         // Create body response based on if person was deleted or not
         if (deleted) {
-            body = "Person deleted" + " \n";
+            body = "Person " + createdPersonId + " deleted" + " \n";
         } else {
-            body = "Person not deleted" + " \n";
+            body = "Person " + createdPersonId + " not deleted" + " \n";
         }
         printRequest(methodNumber, methodName, parameters, body);
     }
@@ -182,7 +182,7 @@ public class PeopleClient{
         String parameters = "1, weight";
         // Get person 1 weight measure history
         List<Measure> measures = people.readPersonHistory(1, "weight");
-        String body = "";
+        String body = "Weight measure history for person 1:" + " \n";
         // Loop through measure list and stringify all measures
         for (int i=0; i<measures.size(); i++) {
             body += stringifyMeasure(measures.get(i));
@@ -249,9 +249,12 @@ public class PeopleClient{
         String parameters = "3, Measure createdMeasure";
 
         // Update the value of previously created measure
+        String body = "Old measure:" + " \n";
+        body += stringifyMeasure(createdMeasure);
         createdMeasure.setValue(90.0);
         int measureId = people.updatePersonMeasure(3, createdMeasure);
-        String body = stringifyMeasure(createdMeasure);
+        body += " \n" + "Updated measure:" + " \n";
+        body += stringifyMeasure(createdMeasure);
         printRequest(methodNumber, methodName, parameters, body);
     }
 
@@ -328,4 +331,16 @@ public class PeopleClient{
         logFile.println("=> Body: ");
         logFile.println(body);
     } 
+
+    /**
+     * Print server info to command line and logfile
+     */
+    public void printServerInfo() {
+        String serverUrl = "http://introsde-assignment3.herokuapp.com/ws/people?wsdl";
+        String serverInfo = "Requesting from server running in: " + serverUrl;
+        System.out.println(serverInfo);
+        System.out.println("");
+        logFile.println(serverInfo);
+        logFile.println("");
+    }
 }
